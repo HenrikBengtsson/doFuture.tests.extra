@@ -68,8 +68,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install.packages(c("rcmdcheck", "BiocManager"))
+          BiocManager::install("BiocParallel")
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
           install.packages(".", repos = NULL, type = "source") ## needed for parallel tests
         shell: Rscript {0}
 
