@@ -1,1 +1,5 @@
 ## A dummy NAMESPACE file - all package must have one
+importFrom(doFuture,registerDoFuture)
+importFrom(future,plan)
+importFrom(future,sequential)
+

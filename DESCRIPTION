@@ -1,7 +1,8 @@
 Package: doFuture.tests.extra
 Version: 0.0.0-9000
 Title: Extra Test Sets for the 'doFuture' Package
-Depends:
+Imports:
+    future,
     doFuture
 Suggests:
     tools,
