@@ -1,0 +1,28 @@
+Package: doFuture.tests.extra
+Version: 0.0.0-9000
+Title: Extra Test Sets for the 'doFuture' Package
+Depends:
+    doFuture
+Suggests:
+    tools,
+    BiocParallel,
+    caret,
+        mda, earth, mlbench, fastICA, klaR, MLmetrics,
+    doParallel,
+    future.batchtools,
+    glmnet,
+       	lars,
+    NMF,
+    plyr,
+    TSP,
+     	sp, maps, maptools
+Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
+                                          email = "henrikb@braju.com"))
+Description: Provides a '%dopar%' adapter such that any type of futures can
+    be used as backends for the 'foreach' framework.
+License: LGPL (>= 2.1)
+LazyLoad: TRUE
+URL: https://doFuture.futureverse.org, https://github.com/HenrikBengtsson/doFuture
+BugReports: https://github.com/HenrikBengtsson/doFuture/issues
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
