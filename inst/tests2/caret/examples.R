@@ -1,10 +1,6 @@
 path <- system.file("tests2", "incl", package = "doFuture.tests.extra", mustWork = TRUE)
 source(file.path(path, "utils.R"))
 
-if (Sys.getenv("TRAVIS") != "true") {
-#  install_missing_packages(c("class", "cluster", "e1071", "earth", "fastICA", "foreign", "gam", "KernSmooth", "classInt", "questionr", "klaR", "lattice", "MASS", "Matrix", "mda", "mlbench", "MLmetrics", "nlme", "nnet", "pls", "proxy", "randomForest", "rpart", "survival", "partykit", "mboost"))
-  ## install_missing_packages(c("ddalpha", "dimRed", "ipred", "ggplot2", "recipes"))
-}
 pkg <- tests2_step("start", package = "caret")
 
 excl <- c(
@@ -71,7 +67,7 @@ mprintf("*** doFuture() - all %s examples ...", pkg)
 for (strategy in test_strategies()) {
   mprintf("- plan('%s') ...", strategy)
 
-  for (ii in seq_along(topics)[-(1:86)]) {
+  for (ii in seq_along(topics)) {
     topic <- topics[ii]
     ## BUG?: example("calibration", run.dontrun = TRUE) only works
     ## for plan(transparent), but not even plan(sequential).  It gives:
