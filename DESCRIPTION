@@ -7,7 +7,7 @@ Suggests:
     tools,
     BiocParallel,
     caret,
-        mda, earth, mlbench, fastICA, klaR, MLmetrics,
+        mda, earth, mlbench, fastICA, klaR, MLmetrics, randomForest,
     doParallel,
     future.batchtools,
     glmnet,
