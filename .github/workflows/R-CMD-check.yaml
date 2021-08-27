@@ -69,7 +69,10 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("rcmdcheck", "BiocManager"))
+          ## We have to manually install dependencies on Bioconductor 
           BiocManager::install("BiocParallel")
+          ## Dependencies of dependencies that are on Bioconductor 
+          BiocManager::install(c("Biobase"))
           remotes::install_deps(dependencies = TRUE)
           install.packages(".", repos = NULL, type = "source") ## needed for parallel tests
         shell: Rscript {0}
