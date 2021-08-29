@@ -7,10 +7,9 @@ if (length(testsets) == 0 || "plyr" %in% testsets) {
   if (Sys.getenv("TRAVIS") == "true") {
     options(doFuture.debug = FALSE, future.debug = FALSE)
   }
+
+  plyr_examples()
   
-  path <- system.file("tests2", package = "doFuture.tests.extra")
-  pathname <- file.path(path, "plyr", "examples.R")
-  source(pathname, echo = TRUE)
   source("incl/end.R")
 }
 rm(list = "testsets")
