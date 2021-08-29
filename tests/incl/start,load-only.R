@@ -1,3 +1,5 @@
+loadNamespace("doFuture.tests.extra")
+
 ## Record original state
 ovars <- ls()
 oopts <- options(warn = 1L,

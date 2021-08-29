@@ -1,5 +1,7 @@
+#' @export
 mprintf <- function(...) message(sprintf(...))
 
+#' @export
 find_rd_topics <- function(package) {
   path <- find.package(package)
   file <- file.path(path, "help", "aliases.rds")
@@ -7,6 +9,7 @@ find_rd_topics <- function(package) {
   sort(unique(topics))
 }
 
+#' @export
 test_topics <- local({
   topics <- NULL
   function(package, subset = NA_integer_, max_subset = NULL) {
@@ -27,6 +30,9 @@ test_topics <- local({
   }
 })
 
+#' @importFrom grDevices graphics.off
+#' @importFrom utils example
+#' @export
 run_example <- function(topic, package, local = FALSE, run.dontrun = TRUE, envir = globalenv()) {
   ovars <- ls(all.names = TRUE, envir = envir)
   on.exit({
@@ -36,9 +42,9 @@ run_example <- function(topic, package, local = FALSE, run.dontrun = TRUE, envir
   })
   
   dt <- system.time({
-    utils::example(topic = topic, package = package, character.only = TRUE,
-                   echo = TRUE, ask = FALSE, local = local,
-                   run.dontrun = run.dontrun)
+    example(topic = topic, package = package, character.only = TRUE,
+            echo = TRUE, ask = FALSE, local = local,
+            run.dontrun = run.dontrun)
   })
   
   dt <- dt[1:3]; names(dt) <- c("user", "system", "elapsed")
@@ -48,8 +54,11 @@ run_example <- function(topic, package, local = FALSE, run.dontrun = TRUE, envir
   invisible(dt)
 }
 
+#' @importFrom doFuture registerDoFuture
+#' @importFrom future plan
+#' @export
 run_examples <- function(package, topics = test_topics(package), strategy, ...) {
-  if (length(topics) == 0) return
+  if (length(topics) == 0) return()
 
   for (ii in seq_along(topics)) {
     topic <- topics[ii]
@@ -61,6 +70,8 @@ run_examples <- function(package, topics = test_topics(package), strategy, ...) 
   } ## for (ii ...)
 }
 
+#' @importFrom utils packageDescription
+#' @export
 package_dependencies <- function(package, needs = NULL) {
   desc <- packageDescription(package)
   what <- c("Depends", "Imports")
@@ -80,6 +91,9 @@ package_dependencies <- function(package, needs = NULL) {
   unique(pkgs)
 }
 
+#' @importFrom utils install.packages file_test
+#' @importFrom BiocManager install
+#' @export
 install_missing_packages <- function(pkgs, bioc = FALSE, repos = "https://cloud.r-project.org") {
   return(FALSE) ## SKIP FOR NOW
   
@@ -90,11 +104,12 @@ install_missing_packages <- function(pkgs, bioc = FALSE, repos = "https://cloud.
           if (!requireNamespace("BiocManager", quietly = TRUE)) {
             install.packages("BiocManager", repos = repos)
           }
-          BiocManager::install(...)
+          install(...)
         }
       })
     } else {
       install_pkg <- local({
+        biocLite <- NULL ## To please R CMD check
         .biocLite <- NULL
         function(...) {
           if (is.null(.biocLite)) {
@@ -153,6 +168,7 @@ install_missing_packages <- function(pkgs, bioc = FALSE, repos = "https://cloud.
   }
 }
 
+#' @export
 test_strategies <- function() {
   strategies <- Sys.getenv("_R_CHECK_FUTURE_STRATEGIES_",
                            "sequential,multisession")
@@ -165,19 +181,21 @@ test_strategies <- function() {
     strategies <- setdiff(strategies, c("multiprocess", "lazy", "eager"))
   }
   if (any(grepl("batchtools_", strategies))) {
-    install_missing_packages("future.batchtools")
-    library("future.batchtools")
+    future.batchtools <- "future.batchtools"
+    install_missing_packages(future.batchtools)
+    library(future.batchtools, character.only = TRUE)
   }
   strategies
 }
 
 
+#' @importFrom utils installed.packages
+#' @export
 tests2_step <- local({
   oopts <- NULL
   
   function(action = c("start", "end"), package = NULL, ...) {
     if (action == "start") {
-      library("doFuture.tests.extra")
       oopts <<- options(warnPartialMatchArgs = FALSE, warn = 1L,
                         digits = 3L, mc.cores = 2L)
       if (!is.null(package)) {

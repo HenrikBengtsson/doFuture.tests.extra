@@ -1,6 +1,3 @@
-path <- system.file("tests2", "incl", package = "doFuture.tests.extra", mustWork = TRUE)
-source(file.path(path, "utils.R"))
-
 pkg <- tests2_step("start", package = "caret")
 
 excl <- c(
