@@ -1,4 +1,4 @@
-#' @importFrom assignInNamespace getFromNamespace
+#' @importFrom utils assignInNamespace getFromNamespace
 plyr_tweak_API <- local({
   tweaked <- FALSE
   
