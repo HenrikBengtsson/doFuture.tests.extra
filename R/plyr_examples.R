@@ -55,7 +55,7 @@ plyr_examples <- function() {
   excl_dontrun <- c("failwith", "here")
   
   ## Exclude because it requires Tk, which is not available on Travis CI
-  if (!capabilities("tcltk") || is.na(Sys.getenv("DISPLAY", NA_character_) || requireNamespace("tcltk")) {
+  if (!capabilities("tcltk") || is.na(Sys.getenv("DISPLAY", NA_character_)) || requireNamespace("tcltk")) {
     excl_dontrun <- c(excl_dontrun, "create_progress_bar", "progress_tk")
   }
   
