@@ -22,4 +22,4 @@ plyr <- "plyr"                            #nolint
 BiocParallel <- "BiocParallel"            #nolint
 NMF <- "NMF"                              #nolint
 
-print(sessionInfo())
+testsets <- strsplit(Sys.getenv("_R_CHECK_TESTSETS_"), split = "[, ]")[[1]]

@@ -1,4 +1,3 @@
-#' @export
 mprintf <- function(...) message(sprintf(...))
 
 #' @export
@@ -70,103 +69,6 @@ run_examples <- function(package, topics = test_topics(package), strategy, ...) 
   } ## for (ii ...)
 }
 
-#' @importFrom utils packageDescription
-#' @export
-package_dependencies <- function(package, needs = NULL) {
-  desc <- packageDescription(package)
-  what <- c("Depends", "Imports")
-  if ("Suggests" %in% needs) {
-    what <- c(what, "Suggests")
-    needs <- setdiff(needs, "Suggests")
-  }
-  pkgs <- unlist(strsplit(unlist(desc[what]), split = "[,\n]"),
-                 use.names = FALSE)
-  pkgs <- gsub(" ", "", pkgs)
-  pkgs <- gsub("[(].*[)]", "", pkgs)
-  pkgs <- pkgs[nzchar(pkgs)]
-  excl <- c("R", "methods", "base", "compiler", "datasets", "graphics",
-            "grDevices", "stats", "tools", "utils")
-  pkgs <- pkgs[!pkgs %in% excl]
-  pkgs <- c(pkgs, needs)
-  unique(pkgs)
-}
-
-#' @importFrom utils install.packages file_test
-#' @importFrom BiocManager install
-#' @export
-install_missing_packages <- function(pkgs, bioc = FALSE, repos = "https://cloud.r-project.org") {
-  return(FALSE) ## SKIP FOR NOW
-  
-  if (bioc) {
-    if (getRversion() > "3.5.0") {
-      install_pkg <- local({
-        function(...) {
-          if (!requireNamespace("BiocManager", quietly = TRUE)) {
-            install.packages("BiocManager", repos = repos)
-          }
-          install(...)
-        }
-      })
-    } else {
-      install_pkg <- local({
-        biocLite <- NULL ## To please R CMD check
-        .biocLite <- NULL
-        function(...) {
-          if (is.null(.biocLite)) {
-            source("https://bioconductor.org/biocLite.R")
-            .biocLite <<- biocLite
-          }
-          .biocLite(...)
-        }
-      })
-    }
-  } else {
-    install_pkg <- function(...) install.packages(..., repos = repos)
-  }
-
-  oenv <- Sys.getenv("R_TESTS")
-  on.exit(Sys.setenv(R_TESTS = oenv))
-  Sys.setenv(R_TESTS = "")
-
-  ## Travis CI: Reuse already installed packages by
-  ## creating symbolic links to package directories
-  ## in the R CMD check library folder .libPaths()[1]
-  ## which only contains the package that doFuture
-  ## depends on (which does not include any packages
-  ## needed by the opt-in package tests).
-  ## Note, it is not enough to add the 'srcpath' to
-  ## .libPaths() because background R workers will not
-  ## inherit such settings.
-  srcpath <- "/home/travis/R/Library"
-  if (file_test("-d", srcpath)) {
-    destpath <- .libPaths()[1]
-    pkgs <- dir(path = srcpath)
-    ## AD HOC: In case there are some 00LOCK- folders left behind,
-    ## ignore those.
-    pkgs <- grep("^00LOCK-", pkgs, value = TRUE, invert = TRUE)
-    for (pkg in pkgs) {
-      srcpkg <- file.path(srcpath, pkg)
-      if (file_test("-d", srcpkg)) {
-        destpkg <- file.path(destpath, pkg)
-        if (!file_test("-d", destpkg)) {
-          file.symlink(from = srcpkg, to = destpkg)
-        }
-      }
-    }
-  }
-
-  mprintf("Library path: %s", paste(sQuote(.libPaths()), collapse = ", "))
-##  mprintf("Installed packages:")
-##  print(installed.packages())
-  
-  for (pkg in unique(pkgs)) {
-    path <- system.file(package = pkg, mustWork = FALSE)
-    if (nzchar(path)) next
-    mprintf("- Installing package: %s", pkg)
-    install_pkg(pkg)
-    system.file(package = pkg, mustWork = TRUE)
-  }
-}
 
 #' @export
 test_strategies <- function() {
@@ -178,18 +80,12 @@ test_strategies <- function() {
   ## Default is to use what's provided by the future package
   if (length(strategies) == 0) {
     strategies <- future:::supportedStrategies()
-    strategies <- setdiff(strategies, c("multiprocess", "lazy", "eager"))
-  }
-  if (any(grepl("batchtools_", strategies))) {
-    future.batchtools <- "future.batchtools"
-    install_missing_packages(future.batchtools)
-    library(future.batchtools, character.only = TRUE)
+    strategies <- setdiff(strategies, "multiprocess")
   }
   strategies
 }
 
 
-#' @importFrom utils installed.packages
 #' @export
 tests2_step <- local({
   oopts <- NULL
@@ -200,19 +96,6 @@ tests2_step <- local({
                         digits = 3L, mc.cores = 2L)
       if (!is.null(package)) {
         mprintf("- Attaching package: %s", package)
-
-        ## WORKAROUND: The package tests depends on the following packages
-        ## that need to be installed if missing.  This is done in order to
-        ## avoid having to add them under 'Suggests:'.
-        install_missing_packages(package)
-        pkgs <- package_dependencies(package, ...)
-        mprintf("- Dependent packages: %s", paste(pkgs, collapse = ", "))
-        install_missing_packages(pkgs)
-        
-        mprintf("- Library path: %s", paste(sQuote(.libPaths()), collapse = ", "))
-        mprintf("- Installed packages:")
-        print(installed.packages())
-  
         library(package, character.only = TRUE)
       }
     } else if (action == "end") {

@@ -4,8 +4,7 @@ Title: Extra Test Sets for the 'doFuture' Package
 Depends:
     doFuture
 Imports:
-    future,
-    BiocManager
+    future
 Suggests:
     tools,
     BiocParallel,
