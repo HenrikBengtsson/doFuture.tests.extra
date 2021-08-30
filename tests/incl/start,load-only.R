@@ -13,6 +13,7 @@ doFuture::registerDoFuture()
 
 mdebug <- doFuture:::mdebug
 mprint <- doFuture:::mprint
+mprintf <- doFuture.tests.extra:::mprintf
 mstr <- doFuture:::mstr
 
 ## To please R CMD check when using require().
