@@ -29,7 +29,5 @@ if (require(NMF, character.only = TRUE)) {
   } ## for (strategy ...)
   
   message("*** NMF w / doFuture ... DONE")
-  
-  tests2_step("stop")
 }
 
