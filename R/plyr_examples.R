@@ -29,7 +29,11 @@ plyr_tweak_API <- local({
 #' @importFrom utils assignInNamespace getFromNamespace
 #' @export
 plyr_examples <- function() {
-  pkg <- tests2_step("start", package = "plyr")
+  pkg <- "plyr"
+  require(pkg, character.only=TRUE) || stop("Package not installed: ", sQuote(pkg))
+  oopts <- options(warnPartialMatchArgs = FALSE, warn = 1L,
+                   digits = 3L, mc.cores = 2L)
+  on.exit(options(oopts))                   
   
   plyr_tweak_API()
   
@@ -75,6 +79,4 @@ plyr_examples <- function() {
   } ## for (strategy ...)
   
   mprintf("*** doFuture() - all %s examples ... DONE", pkg)
-  
-  tests2_step("stop")
 }

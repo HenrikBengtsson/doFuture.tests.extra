@@ -84,24 +84,3 @@ test_strategies <- function() {
   }
   strategies
 }
-
-
-#' @export
-tests2_step <- local({
-  oopts <- NULL
-  
-  function(action = c("start", "end"), package = NULL, ...) {
-    if (action == "start") {
-      oopts <<- options(warnPartialMatchArgs = FALSE, warn = 1L,
-                        digits = 3L, mc.cores = 2L)
-      if (!is.null(package)) {
-        mprintf("- Attaching package: %s", package)
-        library(package, character.only = TRUE)
-      }
-    } else if (action == "end") {
-      options(oopts)
-    }
-    
-    invisible(package)
-  }
-})

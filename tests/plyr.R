@@ -1,7 +1,7 @@
 source("incl/start.R")
 
 if (require(plyr, character.only = TRUE)) {
-  message("*** dplyr w / doFuture + parallel ...")
+  message("*** plyr w / doFuture + parallel ...")
 
   strategies <- future:::supportedStrategies()
   strategies <- setdiff(strategies, "multiprocess")
@@ -37,7 +37,7 @@ if (require(plyr, character.only = TRUE)) {
     message(sprintf("- plan('%s') ... DONE", strategy))
   } ## for (strategy ...)
 
-  message("*** dplyr w / doFuture + parallel ... DONE")
+  message("*** plyr w / doFuture + parallel ... DONE")
 } ## if (require(plyr))
 
 source("incl/end.R")

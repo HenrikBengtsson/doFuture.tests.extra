@@ -1,7 +1,10 @@
 #' @export
 glmnet_examples <- function() {
-  pkg <- tests2_step("start", package = "glmnet",
-                     needs = c("Suggests"))
+  pkg <- "glmnet"
+  require(pkg, character.only=TRUE) || stop("Package not installed: ", sQuote(pkg))
+  oopts <- options(warnPartialMatchArgs = FALSE, warn = 1L,
+                   digits = 3L, mc.cores = 2L)
+  on.exit(options(oopts))                   
   
   ## WORKAROUND: Some of the glmnet examples tries to use more parallel cores
   ## than accepted by R CMD check, i.e. more than two.  This causes an error
@@ -27,6 +30,4 @@ glmnet_examples <- function() {
   } ## for (strategy ...)
   
   mprintf("*** doFuture() - all %s examples ... DONE", pkg)
-  
-  tests2_step("stop")
 }

@@ -1,6 +1,10 @@
 #' @export
 foreach_examples <- function() {
-  pkg <- tests2_step("start", package = "foreach")
+  pkg <- "foreach"
+  require(pkg, character.only=TRUE) || stop("Package not installed: ", sQuote(pkg))
+  oopts <- options(warnPartialMatchArgs = FALSE, warn = 1L,
+                   digits = 3L, mc.cores = 2L)
+  on.exit(options(oopts))                   
   
   mprintf("*** doFuture() - all %s examples ...", pkg)
   
@@ -11,6 +15,4 @@ foreach_examples <- function() {
   } ## for (strategy ...)
   
   mprintf("*** doFuture() - all %s examples ... DONE", pkg)
-  
-  tests2_step("stop")
 }
