@@ -19,6 +19,11 @@ jobs:
 #          - {os: macOS-latest,   r: 'devel'   }
 #          - {os: macOS-latest,   r: 'release' }
           - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest" }
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", testsets: caret }
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", testsets: foreach }
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", testsets: glmnet }
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", testsets: plyr }
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", testsets: TSP }
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -32,6 +37,8 @@ jobs:
       ## Specific to futures
 #      R_FUTURE_RNG_ONMISUSE: error
       R_FUTURE_PLAN: ${{ matrix.config.future_plan }}
+      ## Specific to this package
+      _R_CHECK_TESTSETS_=${{ matrix.config.testsets }}
 
     steps:
       - uses: actions/checkout@v2
