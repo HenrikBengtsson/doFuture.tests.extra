@@ -38,7 +38,7 @@ jobs:
 #      R_FUTURE_RNG_ONMISUSE: error
       R_FUTURE_PLAN: ${{ matrix.config.future_plan }}
       ## Specific to this package
-      _R_CHECK_TESTSETS_=${{ matrix.config.testsets }}
+      _R_CHECK_TESTSETS_: ${{ matrix.config.testsets }}
 
     steps:
       - uses: actions/checkout@v2
