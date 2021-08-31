@@ -18,7 +18,7 @@ jobs:
           - {os: windows-latest, r: 'release' }
 #          - {os: macOS-latest,   r: 'devel'   }
           - {os: macOS-latest,   r: 'release' }
-          - {os: ubuntu-20.04,   r: 'devel' }
+#          - {os: ubuntu-20.04,   r: 'devel' }
           - {os: ubuntu-20.04,   r: 'release', testsets: caret }
           - {os: ubuntu-20.04,   r: 'release', testsets: foreach }
           - {os: ubuntu-20.04,   r: 'release', testsets: glmnet }
