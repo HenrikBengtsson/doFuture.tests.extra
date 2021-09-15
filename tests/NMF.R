@@ -7,14 +7,11 @@ if (require(NMF, character.only = TRUE)) {
   ## run on all workers using the current parallel backend
   data("esGolub", package = "NMF")
 
-  strategies <- future:::supportedStrategies()
-  strategies <- setdiff(strategies, "multiprocess")
-
   res0 <- NULL
 
   res_truth <- nmf(esGolub, rank = 3L, method = "brunet", nrun = 2L, .opt = "p", seed = 0xBEEF)
 
-  for (strategy in strategies) {
+  for (strategy in test_strategies()) {
     message(sprintf("- plan('%s') ...", strategy))
     
     registerDoFuture()

@@ -82,5 +82,9 @@ test_strategies <- function() {
     strategies <- future:::supportedStrategies()
     strategies <- setdiff(strategies, "multiprocess")
   }
+  if (getOption("future.debug", FALSE)) {
+    mprintf("test_strategies(): %s\n",
+            paste(sQuote(strategies), collapse = ", "))
+  }
   strategies
 }

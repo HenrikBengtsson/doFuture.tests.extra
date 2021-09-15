@@ -11,6 +11,8 @@ oplan <- future::plan()
 future::plan(future::sequential)
 doFuture::registerDoFuture()
 
+test_strategies <- doFuture.tests.extra:::test_strategies
+
 mdebug <- doFuture:::mdebug
 mprint <- doFuture:::mprint
 mprintf <- doFuture.tests.extra:::mprintf

@@ -3,12 +3,9 @@ source("incl/start.R")
 if (require(plyr, character.only = TRUE)) {
   message("*** plyr w / doFuture + parallel ...")
 
-  strategies <- future:::supportedStrategies()
-  strategies <- setdiff(strategies, "multiprocess")
-
   res0 <- NULL
   
-  for (strategy in strategies) {
+  for (strategy in test_strategies()) {
     message(sprintf("- plan('%s') ...", strategy))
     plan(strategy)
   
