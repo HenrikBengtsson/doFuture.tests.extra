@@ -7,7 +7,7 @@ Imports:
     future
 Suggests:
     tools,
-    BiocParallel,
+    BiocParallel (>= 1.2.22),
     caret,
         mda, earth, mlbench, fastICA, klaR, MLmetrics, randomForest, gam,
     doParallel,
