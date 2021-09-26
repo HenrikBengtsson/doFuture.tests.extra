@@ -1,4 +1,5 @@
 source("incl/start.R")
+library(BiocParallel)
 
 message("*** BiocParallel w / doFuture + parallel ...")
 
@@ -46,6 +47,5 @@ for (strategy in test_strategies()) {
 } ## for (strategy ...)
 
 message("*** BiocParallel w / doFuture + parallel ... DONE")
-
 
 source("incl/end.R")
