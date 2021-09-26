@@ -1,5 +1,5 @@
 source("incl/start.R")
-if (require("caret")) {
+if (require(caret)) {
   if (length(testsets) == 0 || "caret" %in% testsets) {
     exclude <- NULL
     

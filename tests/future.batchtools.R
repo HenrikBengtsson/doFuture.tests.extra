@@ -1,7 +1,6 @@
 source("incl/start.R")
 
-if (require(future.batchtools, character.only = TRUE)) {
-
+if (require(future.batchtools)) {
   message("*** doFuture + future.batchtools ...")
   
   strategies <- c("batchtools_local", "batchtools_interactive")
@@ -45,7 +44,7 @@ if (require(future.batchtools, character.only = TRUE)) {
   
     message("- Implicitly exporting globals (via future) ... DONE")
   
-    if (require(plyr, character.only = TRUE)) {
+    if (require(plyr)) {
       message("*** dplyr w / doFuture + future.batchtools ...")
   
       print(sessionInfo())
@@ -60,8 +59,7 @@ if (require(future.batchtools, character.only = TRUE)) {
       message("*** dplyr w / doFuture + future.batchtools ... DONE")
     } ## if (require(plyr))
   
-    if (require(BiocParallel, character.only = TRUE) &&
-        packageVersion("BiocParallel") >= "1.2.22") {
+    if (require(BiocParallel)) {
       message("*** BiocParallel w / doFuture + future.batchtools ...")
   
       print(sessionInfo())
@@ -94,7 +92,6 @@ if (require(future.batchtools, character.only = TRUE)) {
   print(sessionInfo())
   
   message("*** doFuture + future.batchtools ... DONE")
-
-} ## if (require(future.batchtools))
+}
 
 source("incl/end.R")

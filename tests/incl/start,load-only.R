@@ -18,11 +18,4 @@ mprint <- doFuture:::mprint
 mprintf <- doFuture.tests.extra:::mprintf
 mstr <- doFuture:::mstr
 
-## To please R CMD check when using require().
-future.batchtools <- "future.batchtools"  #nolint
-caret <- "caret"                          #nolint
-plyr <- "plyr"                            #nolint
-BiocParallel <- "BiocParallel"            #nolint
-NMF <- "NMF"                              #nolint
-
 testsets <- strsplit(Sys.getenv("_R_CHECK_TESTSETS_"), split = "[, ]")[[1]]

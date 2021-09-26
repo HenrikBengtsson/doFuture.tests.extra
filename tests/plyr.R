@@ -1,6 +1,6 @@
 source("incl/start.R")
 
-if (require(plyr, character.only = TRUE)) {
+if (require(plyr)) {
   message("*** plyr w / doFuture + parallel ...")
 
   res0 <- NULL
@@ -35,6 +35,6 @@ if (require(plyr, character.only = TRUE)) {
   } ## for (strategy ...)
 
   message("*** plyr w / doFuture + parallel ... DONE")
-} ## if (require(plyr))
+}
 
 source("incl/end.R")

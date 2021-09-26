@@ -1,6 +1,6 @@
 source("incl/start.R")
 
-if (require(NMF, character.only = TRUE)) {
+if (require(NMF)) {
   message("*** NMF w / doFuture ...")
 
   ## From NMF vignette
