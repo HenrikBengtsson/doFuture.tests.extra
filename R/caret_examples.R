@@ -1,5 +1,5 @@
 #' @export
-caret_examples <- function() {
+caret_examples <- function(exclude = NULL) {
   pkg <- "caret"
   require(pkg, character.only=TRUE) || stop("Package not installed: ", sQuote(pkg))
   oopts <- options(warnPartialMatchArgs = FALSE, warn = 1L,
@@ -42,6 +42,8 @@ caret_examples <- function() {
   }
   
   excl <- getOption("doFuture.tests.topics.ignore", excl)
+  excl <- c(excl, exclude)
+  
   options(doFuture.tests.topics.ignore = excl)
   
   subset <- as.integer(Sys.getenv("R_CHECK_SUBSET_"))
