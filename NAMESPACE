@@ -2,7 +2,6 @@
 
 export(TSP_examples)
 export(caret_examples)
-export(find_rd_topics)
 export(foreach_examples)
 export(glmnet_examples)
 export(plyr_examples)
