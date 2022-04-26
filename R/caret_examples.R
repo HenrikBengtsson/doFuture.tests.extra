@@ -16,7 +16,7 @@ caret_examples <- function(exclude = NULL) {
     "diff.resamples"
   )
 
-  if (getRversion() > "4.2.0") {
+  if (getRversion() >= "4.2.0") {
     excl <- c(excl, "summary.bagEarth")
   }
 
