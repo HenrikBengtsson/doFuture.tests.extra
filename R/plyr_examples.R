@@ -1,7 +1,10 @@
 #' @importFrom utils assignInNamespace getFromNamespace
 plyr_tweak_API <- local({
   tweaked <- FALSE
-  
+
+  ## To please R CMD check
+  assign_in_namespace <- assignInNamespace
+
   function() {
     ## Already done?
     if (tweaked) return()
@@ -16,12 +19,12 @@ plyr_tweak_API <- local({
       if (!".parallel" %in% names(fmls)) next
       formals(fcn)$.parallel <- TRUE
       message(" - plyr function tweaked: ", var)
-      assignInNamespace(var, fcn, ns = ns)
+      assign_in_namespace(var, fcn, ns = ns)
     }
   
     setup_parallel <- getFromNamespace("setup_parallel", ns = ns)
     body(setup_parallel) <- body(setup_parallel)[-3]
-    assignInNamespace("setup_parallel", setup_parallel, ns = ns)
+    assign_in_namespace("setup_parallel", setup_parallel, ns = ns)
   }
 })
 
