@@ -15,7 +15,11 @@ caret_examples <- function(exclude = NULL) {
     "prcomp.resamples",
     "diff.resamples"
   )
-  
+
+  if (getRversion() > "4.2.0") {
+    excl <- c(excl, "summary.bagEarth")
+  }
+
   excl_dontrun <- c(
     ## Non-functional example(run.dontrun = TRUE)
     ## (gives a parsing error)
@@ -96,4 +100,3 @@ caret_examples <- function(exclude = NULL) {
   
   mprintf("*** doFuture() - all %s examples ... DONE", pkg)
 }
-
