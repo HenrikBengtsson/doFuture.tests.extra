@@ -1,3 +1,5 @@
+#' Run All Examples of the 'glmnet' Package via Futureverse
+#'
 #' @export
 glmnet_examples <- function() {
   pkg <- "glmnet"

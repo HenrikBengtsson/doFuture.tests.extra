@@ -1,3 +1,7 @@
+#' Run All Examples of the 'caret' Package via Futureverse
+#'
+#' @param exclude (optional) A character vector of Rd topics to exclude.
+#'
 #' @export
 caret_examples <- function(exclude = NULL) {
   pkg <- "caret"

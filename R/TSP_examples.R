@@ -1,3 +1,5 @@
+#' Run All Examples of the 'TSP' Package via Futureverse
+#'
 #' @export
 TSP_examples <- function() {
   pkg <- "TSP"

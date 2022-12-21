@@ -7,6 +7,18 @@ find_rd_topics <- function(package) {
   sort(unique(topics))
 }
 
+
+#' Run All Examples of the 'test_topics' Package via Futureverse
+#'
+#' @param package A package name.
+#'
+#' @param subset An integer index.
+#'
+#' @param max_subset An integer or NULL.
+#'
+#' @return
+#' Return Rd topics.
+#'
 #' @export
 test_topics <- local({
   topics <- NULL
@@ -28,6 +40,20 @@ test_topics <- local({
   }
 })
 
+
+#' Run one package example
+#'
+#' @inheritParams utils::example
+#'
+#' @param envir The environment from which variables created by the
+#' examples should be removed at the end.
+#'
+#' @return
+#' Invisibly, returns the processing time.
+#'
+#' @seealso
+#' [utils::example()] is used to run the select example.
+#'
 #' @importFrom grDevices graphics.off
 #' @importFrom utils example
 #' @export
@@ -52,6 +78,20 @@ run_example <- function(topic, package, local = FALSE, run.dontrun = TRUE, envir
   invisible(dt)
 }
 
+
+#' Run a package's examples for a specific future plan
+#'
+#' @param package A package name.
+#'
+#' @param topics One or more Rd topics.
+#'
+#' @param strategy A future strategy passed to [future::plan()].
+#'
+#' @param \dots Additional arguments passed to [run_example()].
+#'
+#' @return
+#' Invisibly, returns the processing time.
+#'
 #' @importFrom doFuture registerDoFuture
 #' @importFrom future plan
 #' @export
@@ -69,6 +109,11 @@ run_examples <- function(package, topics = test_topics(package), strategy, ...) 
 }
 
 
+#' Get Available Future Strategies
+#'
+#' @return
+#' A character vector of future strategies.
+#'
 #' @export
 test_strategies <- function() {
   strategies <- Sys.getenv("_R_CHECK_FUTURE_STRATEGIES_",

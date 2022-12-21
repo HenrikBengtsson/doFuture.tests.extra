@@ -1,3 +1,5 @@
+#' Run All Examples of the 'foreach' Package via Futureverse
+#'
 #' @export
 foreach_examples <- function() {
   pkg <- "foreach"

@@ -29,6 +29,8 @@ plyr_tweak_API <- local({
 })
 
 
+#' Run All Examples of the 'plyr' Package via Futureverse
+#'
 #' @importFrom utils assignInNamespace getFromNamespace
 #' @export
 plyr_examples <- function() {
@@ -49,6 +51,13 @@ plyr_examples <- function() {
   excl <- c(excl, "rdply")
   ## (3) Takes 45+ seconds each
   excl <- c(excl, "aaply", "quoted")
+  ## (4) Platform specific
+  if (.Platform$OS.type != "windows") {
+    excl <- c(excl, "progress_win")
+  }
+  if (.Platform$OS.type != "unix") {
+    excl <- c(excl, "progress_tk")
+  }
   options("doFuture.tests.topics.ignore" = excl)
   
   subset <- as.integer(Sys.getenv("R_CHECK_SUBSET_"))
