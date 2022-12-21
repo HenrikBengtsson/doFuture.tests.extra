@@ -1,5 +1,5 @@
 Package: doFuture.tests.extra
-Version: 0.0.0-9003
+Version: 0.1.0
 Title: Extra Test Sets for the 'doFuture' Package
 Depends:
     doFuture
@@ -7,7 +7,7 @@ Imports:
     future
 Suggests:
     tools,
-    BiocParallel (>= 1.2.22),
+    BiocParallel,
     caret,
         mda, earth, mlbench, fastICA, klaR, MLmetrics, randomForest, gam,
     doParallel,
