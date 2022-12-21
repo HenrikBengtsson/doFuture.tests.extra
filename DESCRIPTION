@@ -21,8 +21,7 @@ Suggests:
      	sp, maps, maptools
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
-Description: Provides a '%dopar%' adapter such that any type of futures can
-    be used as backends for the 'foreach' framework.
+Description: Runs examples of packages that use 'foreach' and '%dopar%' for parallelization, where 'doFuture' is used as the 'foreach' adapter making it possible to use any future backend for parallelization.  The package tests use these tools to test 'doFuture' with 'foreach'-based examples from packages 'BiocParallel', 'caret', 'doParallel', 'glmnet', 'NMF', 'plyr', and 'TSP'.  These tests are run with many known future backends.
 License: LGPL (>= 2.1)
 LazyLoad: TRUE
 URL: https://doFuture.futureverse.org, https://github.com/HenrikBengtsson/doFuture
