@@ -60,12 +60,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck any::remotes any::BiocManager
           needs: check
 
       - name: Install dependencies
         run: |
-          install.packages(c("rcmdcheck", "BiocManager"))
           ## We have to manually install dependencies on Bioconductor 
           BiocManager::install("BiocParallel")
           ## Dependencies of dependencies that are on Bioconductor 
