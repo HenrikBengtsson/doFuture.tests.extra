@@ -1,3 +1,8 @@
+# Version (development version)
+
+ * ...
+
+
 # Version 0.1.1 (2023-12-11)
 
  * The archived legacy package **maptools** is no longer suggested.
