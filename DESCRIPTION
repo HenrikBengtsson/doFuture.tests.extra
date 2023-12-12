@@ -1,5 +1,5 @@
 Package: doFuture.tests.extra
-Version: 0.1.0-9002
+Version: 0.1.1
 Title: Extra Test Sets for the 'doFuture' Package
 Depends:
     doFuture
