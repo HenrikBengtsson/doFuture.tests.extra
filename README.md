@@ -1,5 +1,3 @@
-
-
 <div id="badges"><!-- pkgdown markup -->
  <a href="https://github.com/HenrikBengtsson/doFuture.tests.extra/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/doFuture.tests.extra/workflows/R-CMD-check/badge.svg?branch=develop" alt="Build status"/></a>    
 </div>
@@ -28,4 +26,3 @@ This will install the package from source.
 ## Contributing
 
 To contribute to this package, please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
