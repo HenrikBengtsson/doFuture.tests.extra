@@ -122,10 +122,7 @@ test_strategies <- function() {
   strategies <- unlist(strsplit(strategies, split = "[, ]"))
   strategies <- strategies[nzchar(strategies)]
   ## Default is to use what's provided by the future package
-  if (length(strategies) == 0) {
-    strategies <- future:::supportedStrategies()
-    strategies <- setdiff(strategies, "multiprocess")
-  }
+  if (length(strategies) == 0) strategies <- future:::supportedStrategies()
   if (getOption("future.debug", FALSE)) {
     mprintf("test_strategies(): %s\n",
             paste(sQuote(strategies), collapse = ", "))
