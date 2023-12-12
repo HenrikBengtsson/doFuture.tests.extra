@@ -1,5 +1,5 @@
 Package: doFuture.tests.extra
-Version: 0.1.0-9001
+Version: 0.1.0-9002
 Title: Extra Test Sets for the 'doFuture' Package
 Depends:
     doFuture
@@ -18,7 +18,7 @@ Suggests:
     NMF,
     plyr,
     TSP,
-     	sp, maps, maptools
+     	sp, maps
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
 Description: Runs examples of packages that use 'foreach' and '%dopar%' for parallelization, where 'doFuture' is used as the 'foreach' adapter making it possible to use any future backend for parallelization.  The package tests use these tools to test 'doFuture' with 'foreach'-based examples from packages 'BiocParallel', 'caret', 'doParallel', 'glmnet', 'NMF', 'plyr', and 'TSP'.  These tests are run with many known future backends.
