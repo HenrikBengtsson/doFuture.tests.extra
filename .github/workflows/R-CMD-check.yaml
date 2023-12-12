@@ -22,12 +22,12 @@ jobs:
 #          - {os: macOS-latest,   r: 'devel'    }
 #          - {os: macOS-latest,   r: 'release'  }
           - {os: macOS-latest,   r: 'oldrel'   }
-#          - {os: ubuntu-20.04,   r: 'devel'    }
-          - {os: ubuntu-20.04,   r: 'release', testsets: caret }
-          - {os: ubuntu-20.04,   r: 'release', testsets: foreach }
-          - {os: ubuntu-20.04,   r: 'release', testsets: glmnet }
-          - {os: ubuntu-20.04,   r: 'release', testsets: plyr }
-          - {os: ubuntu-20.04,   r: 'release', testsets: TSP }
+#          - {os: ubuntu-latest,  r: 'devel'    }
+          - {os: ubuntu-latest,  r: 'release', testsets: caret }
+          - {os: ubuntu-latest,  r: 'release', testsets: foreach }
+          - {os: ubuntu-latest,  r: 'release', testsets: glmnet }
+          - {os: ubuntu-latest,  r: 'release', testsets: plyr }
+          - {os: ubuntu-latest,  r: 'release', testsets: TSP }
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
       _R_CHECK_TESTSETS_: ${{ matrix.config.testsets }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
