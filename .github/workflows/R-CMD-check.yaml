@@ -101,6 +101,8 @@ jobs:
 
       - name: Check (Windows)
         if: runner.os == 'Windows'
+        env:
+          RCMDCHECK_ERROR_ON: warning
         run: |
           rcmdcheck::rcmdcheck(
             args = c("--no-manual", "--as-cran", if (.Platform$OS.type == "windows" && getRversion() >= "4.2.0") "--no-multiarch"),
