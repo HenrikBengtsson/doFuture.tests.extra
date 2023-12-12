@@ -28,4 +28,3 @@ This will install the package from source.
 ## Contributing
 
 To contribute to this package, please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
